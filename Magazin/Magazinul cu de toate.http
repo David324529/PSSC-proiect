@@ -1,0 +1,62 @@
+# Get all Deliveries
+@Magazinul_cu_de_toate_HostAddress4 = http://localhost:5084
+
+GET {{Magazinul_cu_de_toate_HostAddress}}/api/Deliveries
+Accept: application/json
+
+###
+
+# Get all Invoices
+@Magazinul_cu_de_toate_HostAddress5 = http://localhost:5084
+
+GET {{Magazinul_cu_de_toate_HostAddress}}/api/Invoices
+Accept: application/json
+
+###
+
+# Get all Orders
+@Magazinul_cu_de_toate_HostAddress = http://localhost:5084
+
+GET {{Magazinul_cu_de_toate_HostAddress}}/api/Orders
+Accept: application/json
+
+###
+
+# Create a new Delivery
+@Magazinul_cu_de_toate_HostAddress3 = http://localhost:5084
+
+POST {{Magazinul_cu_de_toate_HostAddress}}/api/Deliveries
+Content-Type: application/json
+{
+    "DeliveryId": "D1234",
+    "OrderId": "O5678",
+    "AWB": "AWB123456789",
+    "IsDelivered": true
+}
+
+###
+
+# Create a new Invoice
+@Magazinul_cu_de_toate_HostAddress2 = http://localhost:5084
+
+POST {{Magazinul_cu_de_toate_HostAddress}}/api/Invoices
+Content-Type: application/json
+{
+    "InvoiceId": "I1234",
+    "OrderId": "O5678",
+    "Amount": 150.75,
+    "IsPaid": false
+}
+
+###
+
+# Create a new Order
+@Magazinul_cu_de_toate_HostAddress1 = http://localhost:5084
+
+POST {{Magazinul_cu_de_toate_HostAddress}}/api/Orders
+Content-Type: application/json
+{
+    "OrderId": "O1234",
+    "TotalAmount": 200.00,
+    "Status": "Validated"
+}

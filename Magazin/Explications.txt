@@ -1,0 +1,48 @@
+API-ul furnizat arată diverse puncte finale pentru gestionarea livrărilor, facturilor și comenzilor. Pe baza diagrama de flux de lucru, următoarele observații pot fi făcute cu privire la modul în care API-ul corespunde procesului:
+
+Plasarea Comenzii:
+
+Logica: Clientul adaugă produse în coș, validează coșul și plasează comanda.
+Punctul final al API-ului: Punctul final /api/Orders este utilizat pentru plasarea comenzii, ceea ce corespunde pasului „Plasarea comenzii” din fluxul de lucru.
+Testare: Pentru a testa plasarea comenzii, poți folosi o cerere POST către punctul final /api/Orders cu datele necesare în corpul cererii (formularul comenzii). Asigură-te că răspunsul confirmă că comanda a fost plasată cu succes.
+Generarea Facturii:
+
+Logica: După ce comanda este plasată, se generează o factură.
+Punctul final al API-ului: Punctul final /api/Invoicing corespunde procesului de generare a facturii. Acesta acceptă un formular de comandă și generează factura.
+Testare: Poți testa acest proces apelând metoda POST a punctului final /api/Invoicing cu datele comenzii. Verifică dacă o factură este generată pentru comandă.
+Generarea AWB pentru Livrare:
+
+Logica: După ce factura este procesată, se generează un AWB (Air Waybill) pentru livrare.
+Punctul final al API-ului: Poate fi utilizat punctul final /api/Deliveries pentru a iniția livrarea. Acest pas este legat de pașii „Comanda expediată” și „AWB generat” din diagrama de flux.
+Testare: Poți apela metoda POST a punctului final /api/Deliveries pentru a iniția livrarea și a genera AWB-ul. Asigură-te că AWB-ul este generat și returnat cu succes.
+Confirmarea Plății:
+
+Logica: După ce factura este generată, se confirmă plata.
+Punctul final al API-ului: Nu există un punct final specific pentru procesarea plății vizibil în Swagger UI, dar poate fi posibil să testezi validarea plății printr-o metodă personalizată care confirmă plata pentru o comandă.
+Testare: Pentru a testa acest proces, ar trebui să simulezi sau să integrezi cu un gateway de plăți și să verifici că starea plății este gestionată corect.
+Testarea Fluxului de Lucru:
+Pentru a testa întregul flux de lucru, poți urma următorii pași:
+
+Plasează o Comandă:
+
+Folosește punctul final POST /api/Orders cu un obiect de comandă.
+Verifică dacă răspunsul indică faptul că comanda a fost plasată cu succes.
+Generează Factura:
+
+După plasarea comenzii, folosește POST /api/Invoices pentru a genera factura.
+Verifică dacă răspunsul indică faptul că factura a fost generată cu succes.
+Generează AWB-ul și Expediază Comanda:
+
+Folosește POST /api/Deliveries pentru a iniția livrarea și a genera AWB-ul.
+Asigură-te că răspunsul include detaliile AWB-ului.
+Verifică Plata:
+
+Pentru procesul de plată, asigură-te că orice integrare sau serviciu utilizat pentru validarea plăților funcționează corect. În funcție de setarea ta, ar putea fi necesar să apelezi un punct final POST /api/Payments sau similar.
+Cum să Testezi în Swagger:
+Poți utiliza Swagger UI pentru a testa fiecare punct final al API-ului urmând acești pași:
+
+Navighează la fiecare punct final relevant în Swagger (Orders, Invoices și Deliveries).
+Apasă pe butonul Try it out pentru fiecare dintre ele.
+Completează parametrii necesari (datele comenzii etc.) în corpul cererii.
+Apasă Execute pentru a trimite cererea către serverul local (asigură-te că serverul rulează).
+Verifică răspunsurile pentru a te asigura că funcționează conform așteptărilor (plasarea comenzii, generarea facturii și crearea AWB-ului).
